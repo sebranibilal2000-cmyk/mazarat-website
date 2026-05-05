@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "تاكسي العمرة والمزارات"
+version = "1.0.0"
+id = "artifacts/taxi-umrah"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19677
+
+[services.development]
+run = "pnpm --filter @workspace/taxi-umrah run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/taxi-umrah", "run", "build" ]
+publicDir = "artifacts/taxi-umrah/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19677"
+BASE_PATH = "/"
